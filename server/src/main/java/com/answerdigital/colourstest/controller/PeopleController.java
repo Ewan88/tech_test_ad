@@ -48,7 +48,7 @@ public class PeopleController {
 
         Optional<Person> person = peopleRespository.findById(id);
 
-        if (person != null) {
+        if (person.isPresent()) {
             return new ResponseEntity(person, HttpStatus.OK);
         } else {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
@@ -67,15 +67,13 @@ public class PeopleController {
         // NotFound should be returned.
 
         Optional<Person> personResponse = peopleRespository.findById(id);
-
-        if (personResponse != null) {
-            Person personObject = personResponse;
-            personObject.setColours(personUpdate.getColours());
+        if (personResponse.isPresent()) {
+            Person personObject = personResponse.get();
             personObject.setAuthorised(personUpdate.isAuthorised());
             personObject.setEnabled(personUpdate.isEnabled());
-
+            personObject.setColours(personUpdate.getColours());
             peopleRespository.save(personObject);
-            return new ResponseEntity(peopleRespository.findById(id), HttpStatus.OK);
+            return new ResponseEntity(personObject, HttpStatus.OK);
         } else {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }

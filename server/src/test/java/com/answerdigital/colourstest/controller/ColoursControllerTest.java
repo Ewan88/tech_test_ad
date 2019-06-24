@@ -46,7 +46,7 @@ public class ColoursControllerTest {
 
     @Test
     public void testGetAllReturnsOk() throws Exception {
-            // Given
+        // Given
         given(coloursRepository.findAll()).willReturn(Collections.emptyList());
 
         // When

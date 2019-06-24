@@ -38,7 +38,7 @@ public class ColoursControllerTest {
         given(coloursRepository.findAll()).willReturn(Collections.emptyList());
 
         // When
-        mvc.perform(get("/Colours").accept(APPLICATION_JSON));
+        mvc.perform(get("/colours").accept(APPLICATION_JSON));
 
         // Then
         verify(coloursRepository).findAll();
@@ -50,7 +50,7 @@ public class ColoursControllerTest {
         given(coloursRepository.findAll()).willReturn(Collections.emptyList());
 
         // When
-        ResultActions result = mvc.perform(get("/Colours").accept(APPLICATION_JSON));
+        ResultActions result = mvc.perform(get("/colours").accept(APPLICATION_JSON));
 
         // Then
         result.andExpect(status().isOk());
@@ -62,7 +62,7 @@ public class ColoursControllerTest {
         given(coloursRepository.findAll()).willReturn(Collections.emptyList());
 
         // When
-        ResultActions result = mvc.perform(get("/Colours").accept(APPLICATION_JSON));
+        ResultActions result = mvc.perform(get("/colours").accept(APPLICATION_JSON));
 
         // Then
         result.andExpect(content().contentTypeCompatibleWith(APPLICATION_JSON))
@@ -77,7 +77,7 @@ public class ColoursControllerTest {
         ));
 
         // When
-        ResultActions result = mvc.perform(get("/Colours").accept(APPLICATION_JSON));
+        ResultActions result = mvc.perform(get("/colours").accept(APPLICATION_JSON));
 
         // Then
         result.andExpect(content().contentTypeCompatibleWith(APPLICATION_JSON))

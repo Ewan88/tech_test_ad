@@ -18,22 +18,28 @@
         Add styles to Palindrome, Authorised and Enabled values.
         When the value is Yes the text colour should be Green.
         When the value is No the text colour should be Red.
-        -->
+      -->
 
-        <tr v-for="person in people" :key="person.id">
-          <td>
-            <router-link
-              :to="{name: 'person-edit', params: { id: person.id }}"
-            >{{person | fullName}}</router-link>
-          </td>
-          <td>{{(person | palindrome) ? 'Yes' : 'No'}}</td>
-          <td>{{person.authorised ? 'Yes' : 'No'}}</td>
-          <td>{{person.enabled ? 'Yes' : 'No'}}</td>
-          <td>{{person.colours | colourNames}}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+      <tr v-for="person in people" :key="person.id">
+        <td>
+          <router-link
+          :to="{name: 'person-edit', params: { id: person.id }}"
+          >{{person | fullName}}</router-link>
+        </td>
+        <td class="red" v-bind:class="{green: palindrome}">
+          {{person | palindrome}}
+        </td>
+        <td class="red" v-bind:class="{green: person.authorised}">
+          {{person.authorised ? 'Yes' : 'No'}}
+        </td>
+        <td class="red" v-bind:class="{green: person.enabled}">
+          {{person.enabled ? 'Yes' : 'No'}}
+        </td>
+        <td>{{person.colours | colourNames}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 </template>
 
 <script lang="ts">
@@ -61,9 +67,9 @@ export default Vue.extend({
       // alphabetically and there should not be a trailing comma.
       //
       // Example: "Blue, Green, Red"
-      let names = [];
-      for (let i = 0; i < colours.length; i++) {
-        names.push(colours[i].name);
+      const names = [];
+      for (const colour of colours) {
+        names.push(colour.name);
       }
       names.sort();
       return names.toString().replace(/,/g, ', ');
@@ -71,7 +77,7 @@ export default Vue.extend({
     fullName: (person: IPerson): string => {
       return `${person.firstName} ${person.lastName}`;
     },
-    palindrome: (person: IPerson): boolean => {
+    palindrome: (person: IPerson): string => {
       const fullName = `${person.firstName} ${person.lastName}`;
       // TODO: Step 5
       //
@@ -81,13 +87,27 @@ export default Vue.extend({
       // spaces and should also be case insensitive.
       //
       // Example: "Bo Bob" is a palindrome.
-
-      return false;
+      const regex = /[^A-Za-z0-9]/g;
+      const name = fullName.toLowerCase().replace(regex, '');
+      for (let i = 0; i < name.length / 2; i++) {
+        if (name[i] !== name[name.length - 1 - i]) {
+          return 'No';
+        }
+      }
+      return 'Yes';
     },
   },
 });
 </script>
 
-<style lang="sass">
+<style scoped>
+
+  .red {
+    color: red;
+  }
+
+  .green {
+    color: green;
+  }
 
 </style>

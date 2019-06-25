@@ -19,6 +19,10 @@ export async function updatePerson(person: IPerson): Promise<boolean> {
   // Send a JSON request to the API with the newly updated
   // person object. Return true or false based if the response
   // is a success or error.
-  console.log(person);
-  return false;
+  const response = await http.put(`people/${person.id}`, person);
+  if (response.status === 200) {
+    return true;
+  } else {
+    return false;
+  }
 }

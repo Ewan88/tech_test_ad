@@ -4,6 +4,8 @@ import com.answerdigital.colourstest.model.Colour;
 import com.answerdigital.colourstest.repository.ColoursRepository;
 import java.util.Arrays;
 import java.util.Collections;
+
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,6 +87,5 @@ public class ColoursControllerTest {
                 + "{'id':2001, 'name':'Red'},{'id':2002, 'name':'Green'}, {'id':2003, 'name':'Blue'}]"
             ));
     }
-
 }
 

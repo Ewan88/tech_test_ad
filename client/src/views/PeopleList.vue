@@ -26,7 +26,7 @@
               :to="{name: 'person-edit', params: { id: person.id }}"
             >{{person | fullName}}</router-link>
           </td>
-          <td>{{(person | palindrome) ? 'Yes' : 'No'}}</td>
+          <!-- <td>{{(person | palindrome) ? 'Yes' : 'No'}}</td> -->
           <td>{{person.authorised ? 'Yes' : 'No'}}</td>
           <td>{{person.enabled ? 'Yes' : 'No'}}</td>
           <td>{{person.colours | colourNames}}</td>
@@ -61,6 +61,15 @@ export default Vue.extend({
       // alphabetically and there should not be a trailing comma.
       //
       // Example: "Blue, Green, Red"
+      let namesArray = [];
+      for (let i = 0; i < colours.length; i++) {
+        namesArray.push(colours[i].name);
+      }
+      namesArray.sort();
+      let namesString = namesArray.toString();
+
+
+      console.log(namesString.replace(/,/g, ', '));
 
       return 'Todo';
     },
@@ -87,4 +96,3 @@ export default Vue.extend({
 <style lang="sass">
 
 </style>
-

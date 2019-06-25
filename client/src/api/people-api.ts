@@ -19,6 +19,6 @@ export async function updatePerson(person: IPerson): Promise<boolean> {
   // Send a JSON request to the API with the newly updated
   // person object. Return true or false based if the response
   // is a success or error.
-
-  throw new Error('Not Implemented');
+  console.log(person);
+  return false;
 }

@@ -26,8 +26,8 @@
           :to="{name: 'person-edit', params: { id: person.id }}"
           >{{person | fullName}}</router-link>
         </td>
-        <td class="red" v-bind:class="{green: palindrome}">
-          {{person | palindrome}}
+        <td class="red" v-bind:class="{green: palindrome(person)}">
+          {{palindrome(person) ? 'Yes' : 'No'}}
         </td>
         <td class="red" v-bind:class="{green: person.authorised}">
           {{person.authorised ? 'Yes' : 'No'}}
@@ -57,6 +57,27 @@ export default Vue.extend({
       people,
     };
   },
+  methods: {
+    palindrome: (person: IPerson): boolean => {
+      const fullName = `${person.firstName} ${person.lastName}`;
+      // TODO: Step 5
+      //
+      // Implement the palindrome computed field.
+      // True should be returned When the FullName is spelt the same
+      // forwards as it is backwards. The match should ignore any
+      // spaces and should also be case insensitive.
+      //
+      // Example: "Bo Bob" is a palindrome.
+      const regex = /[^A-Za-z0-9]/g;
+      const name = fullName.toLowerCase().replace(regex, '');
+      for (let i = 0; i < name.length / 2; i++) {
+        if (name[i] !== name[name.length - 1 - i]) {
+          return false;
+        }
+      }
+      return true;
+    },
+  },
   filters: {
     colourNames: (colours: IColour[]): string => {
       // TODO: Step 4
@@ -76,25 +97,6 @@ export default Vue.extend({
     },
     fullName: (person: IPerson): string => {
       return `${person.firstName} ${person.lastName}`;
-    },
-    palindrome: (person: IPerson): string => {
-      const fullName = `${person.firstName} ${person.lastName}`;
-      // TODO: Step 5
-      //
-      // Implement the palindrome computed field.
-      // True should be returned When the FullName is spelt the same
-      // forwards as it is backwards. The match should ignore any
-      // spaces and should also be case insensitive.
-      //
-      // Example: "Bo Bob" is a palindrome.
-      const regex = /[^A-Za-z0-9]/g;
-      const name = fullName.toLowerCase().replace(regex, '');
-      for (let i = 0; i < name.length / 2; i++) {
-        if (name[i] !== name[name.length - 1 - i]) {
-          return 'No';
-        }
-      }
-      return 'Yes';
     },
   },
 });

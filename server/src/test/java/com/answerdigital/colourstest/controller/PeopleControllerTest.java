@@ -8,6 +8,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
+
+import javax.validation.constraints.AssertTrue;
 
 import static org.assertj.core.util.Lists.newArrayList;
 import static org.mockito.ArgumentMatchers.any;
@@ -242,6 +246,21 @@ public class PeopleControllerTest {
                 "{'id':1, 'firstName':'Bo', 'lastName':'Bob', 'authorised':false, 'enabled':true, 'colours':[{'id':3, 'name':'Blue'}]}"
             ));
     }
+
+    // TODO
+//    @Test
+//    public void testAddPerson() throws Exception {
+//        // Optional Test
+//
+//        final Person newPerson = new Person(1L, "Bo", "Bob", true, false, Arrays.asList(new Colour[]{new Colour(1L, "Red")}));
+//
+//        int originalSize = peopleRepository.findAll().size();
+//        peopleRepository.save(newPerson);
+//        int newSize = peopleRepository.findAll().size();
+//
+//        AssertTrue(originalSize < newSize);
+//
+//    }
 
     private PersonUpdateDTO personUpdateDTO(Boolean authorised, Boolean enabled, Colour... colours) {
         PersonUpdateDTO p = new PersonUpdateDTO();

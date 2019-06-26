@@ -1,22 +1,19 @@
 package com.answerdigital.colourstest.controller;
 
+import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.answerdigital.colourstest.dto.PersonUpdateDTO;
-import com.answerdigital.colourstest.exception.NotImplementedException;
 import com.answerdigital.colourstest.model.Person;
 import com.answerdigital.colourstest.repository.PeopleRepository;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/people")
@@ -77,6 +74,20 @@ public class PeopleController {
         } else {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
+
+    }
+
+    // TODO OPTIONAL
+    @PostMapping("/create")
+    public ResponseEntity<Person> createPerson(@Valid @RequestBody Person person) throws URISyntaxException {
+
+        if (person != null) {
+            return new ResponseEntity(peopleRespository.save(person), HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity(HttpStatus.CONFLICT);
+        }
+
+
 
     }
 

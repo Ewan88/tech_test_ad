@@ -4,6 +4,7 @@ import com.answerdigital.colourstest.model.Colour;
 import com.answerdigital.colourstest.repository.ColoursRepository;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Optional;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -16,10 +17,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -87,5 +90,22 @@ public class ColoursControllerTest {
                 + "{'id':2001, 'name':'Red'},{'id':2002, 'name':'Green'}, {'id':2003, 'name':'Blue'}]"
             ));
     }
+
+    // TODO
+//    @Test
+//    public void testAddColour() throws Exception {
+//        final Colour expectedColour = new Colour(4L, "Pink");
+//
+//        given(coloursRepository.save(any())).willReturn(Optional.of(expectedColour));
+//
+//        ResultActions resultActions = mvc.perform(
+//                post("/colours")
+//                .content("{\"id\":4, \"name\":Pink}")
+//                .contentType(APPLICATION_JSON)
+//                .characterEncoding("UTF-8")
+//                .accept(APPLICATION_JSON));
+//
+//        resultActions.andExpect(status().isCreated());
+//    }
 }
 

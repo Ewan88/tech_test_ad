@@ -79,12 +79,14 @@ public class PeopleController {
 
     // TODO OPTIONAL
     @PostMapping("/create")
-    public ResponseEntity<Person> createPerson(@Valid @RequestBody Person person) throws URISyntaxException {
-
-        if (person != null) {
-            return new ResponseEntity(peopleRespository.save(person), HttpStatus.CREATED);
-        } else {
+    public ResponseEntity<Person> createPerson(@RequestBody Person personNew) {
+        Optional<Person> personResponse = peopleRespository.findById(personNew.getId());
+        if (personResponse.isPresent()) {
             return new ResponseEntity(HttpStatus.CONFLICT);
+        } else {
+            Person personObject = personResponse.get();
+            peopleRespository.save(personObject);
+            return new ResponseEntity(personObject, HttpStatus.CREATED);
         }
 
 

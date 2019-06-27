@@ -47,7 +47,5 @@ public class ColoursController {
         } else {
             return new ResponseEntity(HttpStatus.CONFLICT);
         }
-
-
     }
 }
